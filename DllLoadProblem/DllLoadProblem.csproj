@@ -1,0 +1,42 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Windows.Compatibility" Version="9.0.9" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Reference Include="log4net">
+      <HintPath>log4net.dll</HintPath>
+    </Reference>
+    <!--<Reference Include="Easy.Logger">
+      <HintPath>Easy.Logger.dll</HintPath>
+    </Reference>
+    <Reference Include="Easy.Logger.Interfaces">
+      <HintPath>Easy.Logger.Interfaces.dll</HintPath>
+    </Reference>-->
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Easy.Logger.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Easy.Logger.Interfaces.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="log4net.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="log4net.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  
+</Project>
