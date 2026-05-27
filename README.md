@@ -1,4 +1,4 @@
-#解决方案
+# 解决方案
 
 这是 .NET Framework 和 .NET 8.0 在程序集加载机制上的根本差异导致的。
 
@@ -14,12 +14,15 @@
 
 最直接的修复方式是在 csproj 中加上这个引用：
 
+```
 <Reference Include="B">
   <HintPath>..\DllRef\B.dll</HintPath>
 </Reference>
+```
 这样构建时它会被写入 deps.json，运行时就能正常解析了。
 
 如果你不想改项目引用（比如这类隐式依赖很多），另一种方式是注册自定义的程序集解析逻辑，在 Program.cs 启动时加上：
+```
 System.Runtime.Loader.AssemblyLoadContext.Default.Resolving += (context, assemblyName) =>
 {
     var dllPath = Path.Combine(AppContext.BaseDirectory, $"{assemblyName.Name}.dll");
@@ -27,4 +30,5 @@ System.Runtime.Loader.AssemblyLoadContext.Default.Resolving += (context, assembl
         return context.LoadFromAssemblyPath(dllPath);
     return null;
 };
+```
 这相当于恢复了 .NET Framework 时代"在应用目录下探测 DLL"的行为。
